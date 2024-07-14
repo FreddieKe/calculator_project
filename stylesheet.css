@@ -1,0 +1,92 @@
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h1 {
+    color:darkorange
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    flex-basis: auto;
+    height: 600px;
+    min-width: 800px;
+    flex-grow: 1;
+    border-radius: 4px;
+    padding: 24px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: 100%;
+    gap: 24px;
+}
+
+.display {
+    margin: 24px 0px;
+    padding: 24px 0px;
+    background-color: rgb(192, 214, 192);
+    border-radius: 4px;
+    text-align: right;
+}
+
+.footer {
+    flex-grow:1;
+}
+
+.numbers {
+    flex: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 24px;
+}
+
+.operators {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 24px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    gap: 24px;
+}
+
+.number-button {
+    text-align: center;
+    text-justify: center;
+    flex: 1;
+    background-color: lightgray;
+    font-size: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#equals {
+    background-color: rgb(199, 125, 125);
+}
