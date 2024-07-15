@@ -38,8 +38,28 @@ const operator = function(a,b,operator) {
     }
 }
 
-console.log(operator(2,8,"subtract"));
-console.log(operator(2,8,"add"));
-console.log(operator(2,8,"multiply"));
-console.log(operator(2,8,"divide"));
+let a = null;
+let b = null;
+let c = null;
 
+
+let numberButtons = document.querySelectorAll(".numbers button");
+numberButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        display.textContent += button.textContent;
+    })
+})
+
+let clearDisplay = function () {
+    display.textContent = "";
+}
+
+let display = document.querySelector(".display");
+let clearButton = document.querySelector("#clear");
+
+clearButton.addEventListener("click", () => {
+    clearDisplay();
+});
+
+
+    

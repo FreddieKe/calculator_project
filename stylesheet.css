@@ -80,7 +80,7 @@ body {
     gap: 24px;
 }
 
-.number-button {
+button {
     text-align: center;
     text-justify: center;
     flex: 1;
