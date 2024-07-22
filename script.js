@@ -1,3 +1,6 @@
+
+//mathematical functions
+
 const add = function(a, b) {
 	return a + b;
 };
@@ -36,30 +39,59 @@ const operator = function(a,b,operator) {
         case "subtract":
             return subtract(a,b);
     }
-}
+} 
 
-let a = null;
-let b = null;
-let c = null;
+//variables for input a, input b, and the operator
 
+let firstNum = "";
+let secondNum = "";
+let activeOperator = "";
+let displayValue = "";
+let expectSecondNum = false;
+let newDisplay = false;
 
 let numberButtons = document.querySelectorAll(".numbers button");
+let operatorButtons = document.querySelectorAll(".operator-button");
+let display = document.querySelector(".display");
+let clearButton = document.querySelector("#clear");
+let equalsButton = document.querySelector("#equals");
+
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        display.textContent += button.textContent;
-    })
-})
+        if (newDisplay === true) {
+            clearDisplay();
+            newDisplay = false;
+        } display.textContent += button.textContent.trim();
+        if (expectSecondNum === false) {
+            firstNum = Number(display.textContent);
+        } else {
+            secondNum = Number(display.textContent);
+        }
+})})
+
+operatorButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        activeOperator = button.id;
+        if (!expectSecondNum) {
+            expectSecondNum = true;
+        }
+        newDisplay = true;
+})})
 
 let clearDisplay = function () {
     display.textContent = "";
 }
 
-let display = document.querySelector(".display");
-let clearButton = document.querySelector("#clear");
-
 clearButton.addEventListener("click", () => {
     clearDisplay();
+    firstNum = "";
+    secondNum = "";
+    activeOperator = "";
+    displayValue = "";
+    expectSecondNum = false;
 });
 
-
-    
+equalsButton.addEventListener("click", () => {
+    display.textContent = operator(firstNum, secondNum, activeOperator);
+    firstNum = Number(display.textContent);
+})
