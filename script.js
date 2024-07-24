@@ -96,6 +96,7 @@ numberButtons.forEach((button) => {
 })})
 
 operatorButtons.forEach((button) => {
+    firstNum = display.textContent;
     button.addEventListener("click", () => {
         if (!expectSecondNum) {
             expectSecondNum = true;
@@ -122,5 +123,14 @@ clearButton.addEventListener("click", () => {
 
 equalsButton.addEventListener("click", () => {
     evaluateToDisplay();
+    firstNum = "";
 })
 
+decimalButton.addEventListener("click", () => {
+    if (!display.textContent.includes(".")) {
+        display.textContent += ".";
+        if (expectSecondNum === false) {
+            firstNum = Number(display.textContent);
+        } else {
+            secondNum = Number(display.textContent);
+}}})
