@@ -44,17 +44,25 @@ const operator = function(a,b,operator) {
     }
 } 
 
-let decimalLimit = function(string) {
-    if (string.includes('.')) {
-        let decimalLength = string.split('.')[1].length
-        if (decimalLength < 9
+let decimalLimit = function() {
+    let numAsString = firstNum.toString();
+    if (numAsString.includes('.')) {
+        let decimalLength = numAsString.split('.')[1].length
+        if (decimalLength < dpLimit
             && decimalLength > 0
         ) {
-            display.textContent = Number(display.textContent).toFixed(decimalLength)
-        } if (decimalLength >= 9) {
-            display.textContent = Number(display.textContent).toFixed(9)
+            firstNum = Number(Number(numAsString).toFixed(decimalLength));
+        } if (decimalLength >= dpLimit) {
+            firstNum = Number(Number(numAsString).toFixed(dpLimit));
         }
     }
+}
+
+let evaluateToDisplay = function() {
+    firstNum = operator(firstNum, secondNum, activeOperator);
+    decimalLimit();
+    display.textContent = firstNum;
+    secondNum = "";
 }
 
 //variables for input a, input b, and the operator
@@ -65,13 +73,14 @@ let activeOperator = "";
 let displayValue = "";
 let expectSecondNum = false;
 let newDisplay = false;
-let dpLimit = 9;
+const dpLimit = 9;
 
-let numberButtons = document.querySelectorAll(".numbers button");
+let numberButtons = document.querySelectorAll(".number-button");
 let operatorButtons = document.querySelectorAll(".operator-button");
 let display = document.querySelector(".display");
 let clearButton = document.querySelector("#clear");
 let equalsButton = document.querySelector("#equals");
+let decimalButton = document.querySelector("#decimal");
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -88,11 +97,14 @@ numberButtons.forEach((button) => {
 
 operatorButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        activeOperator = button.id;
         if (!expectSecondNum) {
             expectSecondNum = true;
-        }
+        } else {
+            if (typeof(secondNum) === "number") { 
+            evaluateToDisplay();
+        }}
         newDisplay = true;
+        activeOperator = button.id;
 })})
 
 let clearDisplay = function () {
@@ -109,7 +121,6 @@ clearButton.addEventListener("click", () => {
 });
 
 equalsButton.addEventListener("click", () => {
-    display.textContent = operator(firstNum, secondNum, activeOperator);
-    decimalLimit(display.textContent);
-    firstNum = Number(display.textContent);
+    evaluateToDisplay();
 })
+
