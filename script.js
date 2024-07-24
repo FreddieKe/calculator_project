@@ -21,7 +21,10 @@ const multiply = function(a,b) {
 };
 
 const divide = function(a,b) {
-  return a / b;
+    if (b === 0) {
+        return "ERROR";
+    }
+    return a / b;
 };  
 
 const power = function(num, pow) {
@@ -41,6 +44,19 @@ const operator = function(a,b,operator) {
     }
 } 
 
+let decimalLimit = function(string) {
+    if (string.includes('.')) {
+        let decimalLength = string.split('.')[1].length
+        if (decimalLength < 9
+            && decimalLength > 0
+        ) {
+            display.textContent = Number(display.textContent).toFixed(decimalLength)
+        } if (decimalLength >= 9) {
+            display.textContent = Number(display.textContent).toFixed(9)
+        }
+    }
+}
+
 //variables for input a, input b, and the operator
 
 let firstNum = "";
@@ -49,6 +65,7 @@ let activeOperator = "";
 let displayValue = "";
 let expectSecondNum = false;
 let newDisplay = false;
+let dpLimit = 9;
 
 let numberButtons = document.querySelectorAll(".numbers button");
 let operatorButtons = document.querySelectorAll(".operator-button");
@@ -93,5 +110,6 @@ clearButton.addEventListener("click", () => {
 
 equalsButton.addEventListener("click", () => {
     display.textContent = operator(firstNum, secondNum, activeOperator);
+    decimalLimit(display.textContent);
     firstNum = Number(display.textContent);
 })
