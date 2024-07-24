@@ -81,6 +81,7 @@ let display = document.querySelector(".display");
 let clearButton = document.querySelector("#clear");
 let equalsButton = document.querySelector("#equals");
 let decimalButton = document.querySelector("#decimal");
+let delButton = document.querySelector("#del");
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -96,7 +97,6 @@ numberButtons.forEach((button) => {
 })})
 
 operatorButtons.forEach((button) => {
-    firstNum = display.textContent;
     button.addEventListener("click", () => {
         if (!expectSecondNum) {
             expectSecondNum = true;
@@ -123,7 +123,6 @@ clearButton.addEventListener("click", () => {
 
 equalsButton.addEventListener("click", () => {
     evaluateToDisplay();
-    firstNum = "";
 })
 
 decimalButton.addEventListener("click", () => {
@@ -134,3 +133,12 @@ decimalButton.addEventListener("click", () => {
         } else {
             secondNum = Number(display.textContent);
 }}})
+
+delButton.addEventListener("click", () => {
+    display.textContent = display.textContent.slice(0, display.textContent.length - 1);
+    if (expectSecondNum === false) {
+        firstNum = Number(display.textContent);
+    } else {
+        secondNum = Number(display.textContent);
+    }
+})
