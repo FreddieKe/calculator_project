@@ -1,6 +1,9 @@
 
 //mathematical functions
 
+let numbers = [0,1,2,3,4,5,6,7,8,9];
+let acceptableInputs = ["=","-","+","/","*","Backspace","Enter"]
+
 const add = function(a, b) {
 	return a + b;
 };
@@ -65,6 +68,22 @@ let evaluateToDisplay = function() {
     secondNum = "";
 }
 
+let updateVariables = function() {
+    if (expectSecondNum === false) {
+        firstNum = Number(display.textContent);
+    } else {
+        secondNum = Number(display.textContent);
+    }
+}
+
+let clearValues = function() {
+    firstNum = "";
+    secondNum = "";
+    activeOperator = "";
+    displayValue = "";
+    expectSecondNum = false;
+}
+
 //variables for input a, input b, and the operator
 
 let firstNum = "";
@@ -89,12 +108,34 @@ numberButtons.forEach((button) => {
             clearDisplay();
             newDisplay = false;
         } display.textContent += button.textContent.trim();
-        if (expectSecondNum === false) {
-            firstNum = Number(display.textContent);
-        } else {
-            secondNum = Number(display.textContent);
-        }
+        updateVariables()   
 })})
+
+addEventListener("keydown", (e) => {
+    console.log(e.key);
+    console.log(numbers.includes(Number(e.key)));
+    if (numbers.includes(Number(e.key))) {
+        if (newDisplay === true) {
+            clearDisplay();
+            newDisplay = false;
+        } display.textContent += e.key;
+        updateVariables();
+    } switch(e.key) {
+        case "Backspace":
+            delButton.click();
+        case "=":
+            equalsButton.click();
+        case "Enter":
+            equalsButton.click();
+        case "/":
+            document.querySelector("#divide").click();
+        case "*":
+            document.querySelector("#multiply").click();
+        case "-":
+            document.querySelector("#subtract").click();
+        case "+":
+            document.querySelector("#add").click();
+}})
 
 operatorButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -114,31 +155,22 @@ let clearDisplay = function () {
 
 clearButton.addEventListener("click", () => {
     clearDisplay();
-    firstNum = "";
-    secondNum = "";
-    activeOperator = "";
-    displayValue = "";
-    expectSecondNum = false;
+    clearValues();
 });
 
 equalsButton.addEventListener("click", () => {
     evaluateToDisplay();
+    newDisplay = true;
+    clearValues();
 })
 
 decimalButton.addEventListener("click", () => {
     if (!display.textContent.includes(".")) {
         display.textContent += ".";
-        if (expectSecondNum === false) {
-            firstNum = Number(display.textContent);
-        } else {
-            secondNum = Number(display.textContent);
-}}})
+        updateVariables();
+}})
 
 delButton.addEventListener("click", () => {
     display.textContent = display.textContent.slice(0, display.textContent.length - 1);
-    if (expectSecondNum === false) {
-        firstNum = Number(display.textContent);
-    } else {
-        secondNum = Number(display.textContent);
-    }
+    updateVariables();
 })
