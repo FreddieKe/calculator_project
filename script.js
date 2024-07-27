@@ -88,10 +88,12 @@ let secondNum = "";
 let activeOperator = "";
 let displayValue = "";
 let expectSecondNum = false;
+let expectNewCalculation = false;
 let newDisplay = false;
 const dpLimit = 9;
 let numbers = [0,1,2,3,4,5,6,7,8,9];
 
+let buttons = document.querySelectorAll("button")
 let numberButtons = document.querySelectorAll(".number-button");
 let operatorButtons = document.querySelectorAll(".operator-button");
 let display = document.querySelector(".display");
@@ -153,6 +155,7 @@ addEventListener("keydown", (e) => {
             newDisplay = false;
         } display.textContent += e.key;
         updateVariables();
+    // activates buttons if corresponding key is pressed
     } switch(e.key) {
         case "Backspace":
             delButton.click();
@@ -175,4 +178,17 @@ addEventListener("keydown", (e) => {
         case "+":
             document.querySelector("#add").click();
             break;
+        case ".":
+            decimalButton.click();
+            break;
 }})
+//add effects for button presses
+buttons.forEach((button) => {
+    button.addEventListener("mousedown", () => {
+        button.style.border = "3px solid #ffffff"})
+    button.addEventListener("mouseup", () => {
+        button.style.border = "3px solid rgb(66, 65, 65)";})
+    button.addEventListener("mouseleave", () => {
+        button.style.border = "3px solid rgb(66, 65, 65)";
+})})
+
