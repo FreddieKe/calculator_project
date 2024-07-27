@@ -1,9 +1,6 @@
 
 //mathematical functions
 
-let numbers = [0,1,2,3,4,5,6,7,8,9];
-let acceptableInputs = ["=","-","+","/","*","Backspace","Enter"]
-
 const add = function(a, b) {
 	return a + b;
 };
@@ -93,6 +90,7 @@ let displayValue = "";
 let expectSecondNum = false;
 let newDisplay = false;
 const dpLimit = 9;
+let numbers = [0,1,2,3,4,5,6,7,8,9];
 
 let numberButtons = document.querySelectorAll(".number-button");
 let operatorButtons = document.querySelectorAll(".operator-button");
@@ -108,34 +106,8 @@ numberButtons.forEach((button) => {
             clearDisplay();
             newDisplay = false;
         } display.textContent += button.textContent.trim();
-        updateVariables()   
-})})
-
-addEventListener("keydown", (e) => {
-    console.log(e.key);
-    console.log(numbers.includes(Number(e.key)));
-    if (numbers.includes(Number(e.key))) {
-        if (newDisplay === true) {
-            clearDisplay();
-            newDisplay = false;
-        } display.textContent += e.key;
         updateVariables();
-    } switch(e.key) {
-        case "Backspace":
-            delButton.click();
-        case "=":
-            equalsButton.click();
-        case "Enter":
-            equalsButton.click();
-        case "/":
-            document.querySelector("#divide").click();
-        case "*":
-            document.querySelector("#multiply").click();
-        case "-":
-            document.querySelector("#subtract").click();
-        case "+":
-            document.querySelector("#add").click();
-}})
+})})
 
 operatorButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -160,8 +132,6 @@ clearButton.addEventListener("click", () => {
 
 equalsButton.addEventListener("click", () => {
     evaluateToDisplay();
-    newDisplay = true;
-    clearValues();
 })
 
 decimalButton.addEventListener("click", () => {
@@ -174,3 +144,35 @@ delButton.addEventListener("click", () => {
     display.textContent = display.textContent.slice(0, display.textContent.length - 1);
     updateVariables();
 })
+
+addEventListener("keydown", (e) => {
+    console.log(e.key);
+    if (numbers.includes(Number(e.key))) {
+        if (newDisplay === true) {
+            clearDisplay();
+            newDisplay = false;
+        } display.textContent += e.key;
+        updateVariables();
+    } switch(e.key) {
+        case "Backspace":
+            delButton.click();
+            break;
+        case "=":
+            equalsButton.click();
+            break;
+        case "Enter":
+            equalsButton.click();
+            break;
+        case "/":
+            document.querySelector("#divide").click();
+            break;
+        case "*":
+            document.querySelector("#multiply").click();
+            break;
+        case "-":
+            document.querySelector("#subtract").click();
+            break;
+        case "+":
+            document.querySelector("#add").click();
+            break;
+}})
