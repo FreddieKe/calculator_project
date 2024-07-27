@@ -4,7 +4,6 @@
 }
 
 h1 {
-    font-family: "Apple Chancery";
     color:darkorange
 }
 
@@ -97,6 +96,10 @@ button {
 }
 
 #equals {
-    background-color: rgb(211, 11, 11);
+    background-color: rgb(252, 10, 10);
 }
 
+.number-button,
+#decimal {
+    background-color: rgb(105, 105, 250);
+}
