@@ -79,6 +79,7 @@ let clearValues = function() {
     activeOperator = "";
     displayValue = "";
     expectSecondNum = false;
+    expectNewCalculation = false;
 }
 
 //variables for input a, input b, and the operator
@@ -104,11 +105,10 @@ let delButton = document.querySelector("#del");
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        // if (expectNewCalculation === true) {
-            // clearDisplay();
-            // clearValues();
-            // expectNewCalculation = false;
-        // }
+        if (expectNewCalculation === true) {
+            clearDisplay();
+            clearValues();
+        }
         if (newDisplay === true) {
             clearDisplay();
             newDisplay = false;
@@ -117,8 +117,8 @@ numberButtons.forEach((button) => {
 })})
 
 operatorButtons.forEach((button) => {
-    expectNewCalculation = false;
     button.addEventListener("click", () => {
+        expectNewCalculation = false;
         if (!expectSecondNum) {
             expectSecondNum = true;
         } else {
@@ -156,13 +156,6 @@ delButton.addEventListener("click", () => {
 
 addEventListener("keydown", (e) => {
     console.log(e.key);
-    // if (numbers.includes(Number(e.key))) {
-        
-    //     if (newDisplay === true) {
-    //         clearDisplay();
-    //         newDisplay = false;
-    //     } display.textContent += e.key;
-    //     updateVariables();
     // activates buttons if corresponding key is pressed
     switch(e.key) {
         case "1":
@@ -174,7 +167,7 @@ addEventListener("keydown", (e) => {
         case "3":
             document.querySelector("#three").click();
             break;
-        case "4":
+        case "":
             document.querySelector("#four").click();
             break;
         case "5":
@@ -191,6 +184,9 @@ addEventListener("keydown", (e) => {
             break;
         case "9":
             document.querySelector("#nine").click();
+            break;
+        case "0":
+            document.querySelector("#nought").click();
             break;
         case "Backspace":
             delButton.click();
@@ -224,8 +220,8 @@ buttons.forEach((button) => {
     button.addEventListener("mousedown", () => {
         button.style.border = "3px solid #ffffff"})
     button.addEventListener("mouseup", () => {
-        button.style.border = "3px solid rgb(66, 65, 65)";})
+        button.style.border = "3px solid rgb(0,0,0)";})
     button.addEventListener("mouseleave", () => {
-        button.style.border = "3px solid rgb(66, 65, 65)";
+        button.style.border = "3px solid rgb(0, 0, 0)";
 })})
 
