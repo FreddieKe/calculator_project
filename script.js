@@ -104,6 +104,11 @@ let delButton = document.querySelector("#del");
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
+        // if (expectNewCalculation === true) {
+            // clearDisplay();
+            // clearValues();
+            // expectNewCalculation = false;
+        // }
         if (newDisplay === true) {
             clearDisplay();
             newDisplay = false;
@@ -112,6 +117,7 @@ numberButtons.forEach((button) => {
 })})
 
 operatorButtons.forEach((button) => {
+    expectNewCalculation = false;
     button.addEventListener("click", () => {
         if (!expectSecondNum) {
             expectSecondNum = true;
@@ -134,6 +140,7 @@ clearButton.addEventListener("click", () => {
 
 equalsButton.addEventListener("click", () => {
     evaluateToDisplay();
+    expectNewCalculation = true;
 })
 
 decimalButton.addEventListener("click", () => {
@@ -149,14 +156,42 @@ delButton.addEventListener("click", () => {
 
 addEventListener("keydown", (e) => {
     console.log(e.key);
-    if (numbers.includes(Number(e.key))) {
-        if (newDisplay === true) {
-            clearDisplay();
-            newDisplay = false;
-        } display.textContent += e.key;
-        updateVariables();
+    // if (numbers.includes(Number(e.key))) {
+        
+    //     if (newDisplay === true) {
+    //         clearDisplay();
+    //         newDisplay = false;
+    //     } display.textContent += e.key;
+    //     updateVariables();
     // activates buttons if corresponding key is pressed
-    } switch(e.key) {
+    switch(e.key) {
+        case "1":
+            document.querySelector("#one").click();
+            break;
+        case "2":
+            document.querySelector("#two").click();
+            break;
+        case "3":
+            document.querySelector("#three").click();
+            break;
+        case "4":
+            document.querySelector("#four").click();
+            break;
+        case "5":
+            document.querySelector("#five").click();
+            break;
+        case "6":
+            document.querySelector("#six").click();
+            break;
+        case "7":
+            document.querySelector("#seven").click();
+            break;
+        case "8":
+            document.querySelector("#eight").click();
+            break;
+        case "9":
+            document.querySelector("#nine").click();
+            break;
         case "Backspace":
             delButton.click();
             break;
@@ -182,6 +217,8 @@ addEventListener("keydown", (e) => {
             decimalButton.click();
             break;
 }})
+
+
 //add effects for button presses
 buttons.forEach((button) => {
     button.addEventListener("mousedown", () => {
