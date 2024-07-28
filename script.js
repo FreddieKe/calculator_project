@@ -44,28 +44,29 @@ const operator = function(a,b,operator) {
     }
 } 
 
+
 let decimalLimit = function() {
     let numAsString = firstNum.toString();
-    if (numAsString.includes('.')) {
+    if (numAsString.includes('.')) { //checks if number is integer
         let decimalLength = numAsString.split('.')[1].length
-        if (decimalLength < dpLimit
+        if (decimalLength < dpLimit 
             && decimalLength > 0
         ) {
-            firstNum = Number(Number(numAsString).toFixed(decimalLength));
+            firstNum = Number(Number(numAsString).toFixed(decimalLength));  
         } if (decimalLength >= dpLimit) {
-            firstNum = Number(Number(numAsString).toFixed(dpLimit));
+            firstNum = Number(Number(numAsString).toFixed(dpLimit)); //limits to max number of dp
         }
     }
 }
 
-let evaluateToDisplay = function() {
+let evaluateToDisplay = function() { //updates running total
     firstNum = operator(firstNum, secondNum, activeOperator);
     decimalLimit();
     display.textContent = firstNum;
-    secondNum = "";
+    secondNum = ""; 
 }
 
-let updateVariables = function() {
+let updateVariables = function() { //changes relevant variable to what is on display
     if (expectSecondNum === false) {
         firstNum = Number(display.textContent);
     } else {
@@ -105,28 +106,28 @@ let delButton = document.querySelector("#del");
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        if (expectNewCalculation === true) {
+        if (expectNewCalculation === true) {    //checks if last operation pressed was equals, in which case new calculation required
             clearDisplay();
             clearValues();
         }
         if (newDisplay === true) {
             clearDisplay();
             newDisplay = false;
-        } display.textContent += button.textContent.trim();
-        updateVariables();
+        } display.textContent += button.textContent.trim(); //trim to remove spacing from html
+        updateVariables(); 
 })})
 
 operatorButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        expectNewCalculation = false;
-        if (!expectSecondNum) {
-            expectSecondNum = true;
+        expectNewCalculation = false; //tells number buttons that last operation pressed was not equals
+        if (!expectSecondNum) { //checks if second variable to be updated or total
+            expectSecondNum = true; 
         } else {
-            if (typeof(secondNum) === "number") { 
+            if (typeof(secondNum) === "number") { //checks if there is a valid second number
             evaluateToDisplay();
         }}
         newDisplay = true;
-        activeOperator = button.id;
+        activeOperator = button.id; 
 })})
 
 let clearDisplay = function () {
@@ -140,22 +141,25 @@ clearButton.addEventListener("click", () => {
 
 equalsButton.addEventListener("click", () => {
     evaluateToDisplay();
-    expectNewCalculation = true;
+    expectNewCalculation = true; //tells number buttons that last operation pressed was equals
 })
 
 decimalButton.addEventListener("click", () => {
-    if (!display.textContent.includes(".")) {
+    if (!display.textContent.includes(".")) { //check if number on screen already has a decimal
         display.textContent += ".";
         updateVariables();
 }})
 
 delButton.addEventListener("click", () => {
+    if (expectNewCalculation === true) {    //checks if last operation pressed was equals, in which case new calculation required
+        clearDisplay();
+        clearValues();
+    } else {
     display.textContent = display.textContent.slice(0, display.textContent.length - 1);
-    updateVariables();
+    updateVariables();}
 })
 
 addEventListener("keydown", (e) => {
-    console.log(e.key);
     // activates buttons if corresponding key is pressed
     switch(e.key) {
         case "1":
@@ -167,7 +171,7 @@ addEventListener("keydown", (e) => {
         case "3":
             document.querySelector("#three").click();
             break;
-        case "":
+        case "4":
             document.querySelector("#four").click();
             break;
         case "5":
@@ -214,14 +218,14 @@ addEventListener("keydown", (e) => {
             break;
 }})
 
-
 //add effects for button presses
 buttons.forEach((button) => {
     button.addEventListener("mousedown", () => {
-        button.style.border = "3px solid #ffffff"})
+        button.style.border = "3px solid #fff685"})
     button.addEventListener("mouseup", () => {
-        button.style.border = "3px solid rgb(0,0,0)";})
+        button.style.border = "3px solid  #0049B7";})
     button.addEventListener("mouseleave", () => {
-        button.style.border = "3px solid rgb(0, 0, 0)";
+        button.style.border = "3px solid  #0049B7";
 })})
+
 
